@@ -1468,7 +1468,7 @@ button:hover {
  
 /*Ids css*/
 .header_h1 {
-  margin-top: 200px; /* Adjust the margin-top value as needed */
+  margin-top: 70px; /* Adjust the margin-top value as needed */
   text-align: center; /* Center the text horizontally */
 }
 
@@ -1610,4 +1610,59 @@ button:hover {
     opacity: 0;
     top: -20px;
   }
+}
+
+    /* Container style */
+    .zauba_container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+  }
+
+  .header_h6 {
+  margin-top: 160px; /* Adjust the margin-top value as needed */
+  text-align: center; /* Center the text horizontally */
+}
+
+.header_h6 h1 {
+  display: block;
+}
+
+/*KB-Tool logo*/
+
+
+.header_h6 h1{
+  
+  font-size: 50px;
+  font-weight: bold;
+  font-family: monospace;
+  letter-spacing: 7px;
+  cursor: pointer
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.header_h6 h1 span{
+  transition: .5s linear
+}
+.header_h6 h1:hover span:nth-child(1){
+  margin-right: 5px
+}
+.header_h6 h1:hover span:nth-child(1):after{
+  content: "'";
+}
+.header_h6 h1:hover span:nth-child(2){
+  margin-left: 30px
+}
+.header_h6 h1:hover span{
+  color: #ffffff;
+  text-shadow: 0 0 10px #16a511,
+               0 0 20px #aed12f, 
+               0 0 40px #fff;
 }
