@@ -106,49 +106,46 @@ if (localStorage.getItem("theme") === "light_theme") {
 
 
 /**KB-tool */
+function copyResult() {
+  var loanId = document.getElementById("loanId").value.trim();
+  var idsInput = document.getElementById("ids").value.trim();
 
-var inputField = document.getElementById("inputIds");
-inputField.addEventListener("keyup", function(event) {
-    if (event.keyCode === 13) {
-        event.preventDefault();
-        copyIds();
+  var idsArray = idsInput.split(" ");
+  var idsCount = idsArray.length;
+  var idsOutput = idsArray.join(",");
+
+  var result = "";
+
+  if (idsCount > 0) {
+    if (loanId) {
+      result = loanId + ":" + idsCount + ":" + idsOutput;
+    } else {
+      result = idsCount + ":" + idsOutput;
     }
-});
-
-function copyIds() {
-    var input = inputField.value;
-    var ids = input.split(" ");
-    var count = ids.length;
-    document.getElementById("count").innerHTML = "Count: " + count;
-    document.getElementById("output").innerHTML = count + ":" + ids.join(",");
-    var temp = document.createElement("textarea");
-    temp.value = count + ":" + ids.join(",");
-    document.body.appendChild(temp);
-    temp.select();
-    document.execCommand("copy");
-    document.body.removeChild(temp);
-    
-}
-
-function resetIds() {
-    inputField.value = "";
-    document.getElementById("count").innerHTML = "";
-    document.getElementById("output").innerHTML = "";
-}
-
-
-
-function copyOutput() {
-    const output = document.getElementById("output").innerText;
-    navigator.clipboard.writeText(output);
   }
 
-  function reset() {
-    document.getElementById("input").value = "";
-    document.getElementById("output").innerText = "";
+  document.getElementById("output").innerHTML = result;
+
+  var resultOutput = document.getElementById("output");
+  var range = document.createRange();
+  range.selectNode(resultOutput);
+  window.getSelection().removeAllRanges();
+  window.getSelection().addRange(range);
+  document.execCommand("copy");
+  window.getSelection().removeAllRanges();
+}
+
+function resetFields() {
+  document.getElementById("loanId").value = "";
+  document.getElementById("ids").value = "";
+  document.getElementById("output").innerHTML = "Result will be displayed here";
+}
+
+function checkEnter(event) {
+  if (event.keyCode === 13) {
+    copyResult();
   }
-
-
+}
 
   
   function search() {

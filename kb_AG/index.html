@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Input IDs with Commas</title>
+    <style>
+      body {
+        background-image: url('/1398439.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 800px;
+        text-align: center;
+      }
+
+      .input-container {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        width: 100%;
+      }
+
+      .input-container label {
+        font-size: 14px;
+        margin-bottom: 5px;
+        color: #fff;
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        background: rgba(0, 255, 128, 0.1);
+        color: #fff;
+        margin-top: 5px;
+        width: 100%;
+        outline: none;
+        box-shadow: 0 0 10px rgba(6, 168, 120, 0.5);
+        transition: background-color 0.3s, box-shadow 0.3s;
+      }
+
+      input[type="text"]:focus {
+        background: rgba(0, 255, 149, 0.2);
+      }
+
+      button {
+  background-color: #2c772f;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      #copyButton {
+        background-color: #28a745;
+      }
+
+      #copyButton:hover {
+        background-color: #218838;
+      }
+
+      #resetButton {
+        background-color: #dc3545;
+      }
+
+      #resetButton:hover {
+        background-color: #c82333;
+      }
+
+      #output {
+        margin-top: 20px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: left;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="input-container">
+        <label for="loanId">Enter ID for QID 106 and 117:</label>
+        <input type="text" id="loanId" onkeyup="checkEnter(event)">
+      </div>
+      <div class="input-container">
+        <label for="ids">Enter IDs separated by spaces:</label>
+        <input type="text" id="ids" onkeyup="checkEnter(event)">
+      </div>
+      <div class="input-container">
+        <button id="copyButton" onclick="copyResult()">Copy</button>
+        <button id="resetButton" onclick="resetFields()">Reset</button>
+      </div>
+      <div id="output">Result will be displayed here</div>
+    </div>
+
+    <script>
+      function copyResult() {
+        var loanId = document.getElementById("loanId").value.trim();
+        var idsInput = document.getElementById("ids").value.trim();
+
+        var idsArray = idsInput.split(" ");
+        var idsCount = idsArray.length;
+        var idsOutput = idsArray.join(",");
+
+        var result = "";
+
+        if (idsCount > 0) {
+          if (loanId) {
+            result = loanId + ":" + idsCount + ":" + idsOutput;
+          } else {
+            result = idsCount + ":" + idsOutput;
+          }
+        }
+
+        document.getElementById("output").innerHTML = result;
+
+        var resultOutput = document.getElementById("output");
+        var range = document.createRange();
+        range.selectNode(resultOutput);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand("copy");
+        window.getSelection().removeAllRanges();
+      }
+
+      function resetFields() {
+        document.getElementById("loanId").value = "";
+        document.getElementById("ids").value = "";
+        document.getElementById("output").innerHTML = "Result will be displayed here";
+      }
+
+      function checkEnter(event) {
+        if (event.keyCode === 13) {
+          copyResult();
+        }
+      }
+    </script>
+  </body>
+</html>

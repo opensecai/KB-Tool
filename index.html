@@ -99,22 +99,27 @@
   <div class="header_h6">
     <h1><span>KB</span>Tool<span>.</span></h1>
   </div>
+  <div class="header_h1">
+    <h1>In-put Transaction IDs</h1>
+  </div>
 
-<section>
-    <div class="header_h1">
-        <h1>In-put Transaction IDs</h1>
-      </div>
-    <div class="container-ids">
-
-        <input type="text" id="inputIds" placeholder="Enter IDs and press Enter to copy">
-        <button id="copy" onclick="copyIds()">Copy IDs</button>
-        <button id="reset" onclick="resetIds()">Reset</button>
-        <div style="margin-bottom: 70px;"></div>
-
-        <p style="color: rgb(73, 151, 63);" id="count"></p>
-        
-        <p style="color: rgb(73, 151, 63);" id="output"></p>
-    </div>
+  <div class="container-Ag">
+    <label style="color: rgb(73, 151, 63);" for="loanId">Enter customer ID for QID 106 and 117 :</label>
+    <input type="text" id="loanId" onkeyup="checkEnter(event)">
+  </div>
+  
+  <div class="container-ids">
+    <input type="text" id="ids" placeholder="Enter transactions_info_id and press Enter to copy" onkeyup="checkEnter(event)">
+  </div>
+  <div class="button-container">
+    <button id="copyButton" onclick="copyResult()">
+      <i class="fas fa-copy"></i> Copy
+    </button>
+    <button id="resetButton" onclick="resetFields()">
+      <i class="fas fa-redo"></i> Reset
+    </button>
+  </div>
+  <div id="output"></div>
 </section>
 
 <section>
