@@ -1,3 +1,8 @@
+
+function showUpdateAlert() {
+  alert("New update available! Please refresh the page to apply the update.");
+}
+
 'use strict';
 
 /**
