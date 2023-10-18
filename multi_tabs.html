@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tab Opener</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .input-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 18px;
+            color: #333;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #4CAF50; /* Green border */
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.7); /* Green glow */
+        }
+
+        button {
+            background-color: #4CAF50; /* Green background */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-left: 5px;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.7); /* Green glow */
+        }
+
+        button.stop-button {
+            background-color: #E53935; /* Red background for Stop button */
+        }
+
+        button.reset-button {
+            background-color: #1976D2; /* Blue background for Reset button */
+        }
+
+        button:hover {
+            background-color: #388E3C; /* Darker green on hover */
+        }
+
+        .result-container {
+            text-align: center;
+        }
+
+        p {
+            font-size: 16px;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tab Opener</h1>
+    
+    <div class="container">
+        <div class="input-container">
+            <label for="idInput">Enter IDs (comma-separated without spaces):</label>
+            <input type="text" id="idInput" placeholder="e.g., 1966784,77674960,67623101">
+            <button id="openTabsButton" class="gpt-button">Open Tabs</button>
+            <button id="stopButton" class="gpt-button stop-button">Stop</button>
+            <button id="resetButton" class="gpt-button reset-button">Reset</button>
+        </div>
+        
+        <div class="result-container">
+            <p>Status: <span id="status">Ready</span></p>
+            <p>Count of IDs: <span id="count">0</span></p>
+        </div>
+    </div>
+
+    <script>
+        const status = document.getElementById("status");
+        const openTabsButton = document.getElementById("openTabsButton");
+        const stopButton = document.getElementById("stopButton");
+        const resetButton = document.getElementById("resetButton");
+        const idInput = document.getElementById("idInput");
+        const count = document.getElementById("count");
+        let openedTabs = 0;
+        let intervalId;
+
+        function openTabs() {
+            const inputText = idInput.value.trim();
+            const ids = inputText.split(",");
+
+            if (inputText === "") {
+                status.textContent = "No IDs provided";
+                return;
+            }
+
+            status.textContent = "Opening tabs...";
+            openTabsButton.disabled = true;
+            stopButton.disabled = false;
+            resetButton disabled = true;
+            idInput.disabled = true;
+            openedTabs = 0;
+            count.textContent = openedTabs;
+
+            let index = 0;
+
+            function openNextTab() {
+                if (index < ids.length) {
+                    if (openedTabs < index) {
+                        openedTabs++;
+                        count.textContent = openedTabs;
+                    }
+                    const id = ids[index].trim();
+                    const url = `https://fkb.kreditbee.in/admin/profile?id=${id}`;
+                    window.open(url, "_blank");
+                    index++;
+                    intervalId = setTimeout(openNextTab, 3000); // Wait 3 seconds before opening the next tab
+                } else {
+                    status.textContent = "All tabs opened";
+                    openTabsButton.disabled = false;
+                    stopButton.disabled = true;
+                    resetButton.disabled = false;
+                    idInput.disabled = false;
+                }
+            }
+
+            openNextTab();
+        }
+
+        openTabsButton.addEventListener("click", openTabs);
+
+        stopButton.addEventListener("click", () => {
+            clearTimeout(intervalId);
+            status.textContent = "Opening stopped";
+            openTabsButton.disabled = false;
+            stopButton.disabled = true;
+            resetButton.disabled = false;
+            idInput.disabled = false;
+        });
+
+        resetButton.addEventListener("click", () => {
+            clearTimeout(intervalId);
+            status.textContent = "Ready";
+            openTabsButton.disabled = false;
+            stopButton.disabled = true;
+            resetButton.disabled = true;
+            idInput.disabled = false;
+        });
+    </script>
+</body>
+</html>

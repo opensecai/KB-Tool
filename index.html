@@ -1,376 +1,192 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KB-tool</title>
+    <title>Tab Opener</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #333, #000); /* Black to dark gray gradient background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
 
-  <!-- 
-    - favicon
-  -->
-  <link rel="shortcut icon" href="./assets/images/img_logo/favicon_io/favicon-16x16.png" type="image/svg+xml">
+        h1 {
+            font-size: 24px;
+            color: #fff; /* White text */
+        }
 
-  <!-- 
-    - custom css link
-  -->
-  <link rel="stylesheet" href="./assets/css/style.css">
+        .container {
+            background-color: #333; /* Dark gray container background */
+            border: 1px solid #1ecb00;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(30, 203, 0, 0.2);
+        }
 
-  <!-- 
-    - google font link
-  -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;700&family=Saira+Stencil+One&display=swap"
-    rel="stylesheet">
+        .input-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 18px;
+            color: #fff; /* White text */
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #1ecb00;
+            border-radius: 5px;
+        }
+
+        button.open {
+            background: linear-gradient(to bottom, #00b30b, #008f09); /* Green gradient button */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+
+        button.stop {
+            background: linear-gradient(to bottom, #ff3333, #cc0000); /* Red gradient button */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+
+        button.reset {
+            background: linear-gradient(to bottom, #007fff, #0056b3); /* Blue gradient button */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+
+        button.open:hover {
+            background: linear-gradient(to bottom, #008f09, #007b07); /* Darker green on hover */
+        }
+
+        button.stop:hover {
+            background: linear-gradient(to bottom, #cc0000, #aa0000); /* Darker red on hover */
+        }
+
+        button.reset:hover {
+            background: linear-gradient(to bottom, #0056b3, #004199); /* Darker blue on hover */
+        }
+
+        .result-container {
+            text-align: center;
+        }
+
+        p {
+            font-size: 16px;
+            color: #fff; /* White text */
+        }
+
+        span {
+            font-weight: bold;
+        }
+    </style>
 </head>
-
-<body id="top" class="dark_theme">
-
-  <!-- 
-    - #HEADER
-  -->
-
-  <header class="header" data-header>
+<body>
+    <h1>Multi-Tab open </h1>
+    
     <div class="container">
-
-      <h1 class="h1 logo">
-        <a href="#">opensec<span>Ai</span></a>
-      </h1>
-
-      <div class="navbar-actions">
-
-        <select name="language" id="lang">
-          <option value="en">En</option>
-          <option value="ar">Ar</option>
-        </select>
-
-        <button class="theme-btn" aria-label="Change Theme" title="Change Theme" data-theme-btn>
-          <span class="icon"></span>
-        </button>
-
-      </div>
-
-      <button class="nav-toggle-btn" aria-label="Toggle Menu" title="Toggle Menu" data-nav-toggle-btn>
-        <span class="one"></span>
-        <span class="two"></span>
-        <span class="three"></span>
-      </button>
-
-      <nav class="navbar" data-navbar>
-        <ul class="navbar-list">
-
-          <li>
-            <a href="https://opensecai.com/" class="navbar-link">Home.</a>
-          </li>
-<!--
-          <li>
-            <a href="https://opensecai.com/" class="navbar-link">About.</a>
-          </li>
-          <li>
-            <a href="#Research" class="navbar-link">Research.</a>
-          </li>
-          <li>
-            <a href="#Learning" class="navbar-link">Learning.</a>
-          </li>
-          <li>
-            <a href="#Products" class="navbar-link">Products.</a>
-          </li>
-          
-
-          <li>
-            <a href="#contact" class="navbar-link">Contact.</a>
-          </li>
--->
-        </ul>
-      </nav>
-
-    </div>
-  </header>
-
-
-
-  <a href="#top" class="go-top" data-go-top title="Go to Top">
-    <ion-icon name="arrow-up"></ion-icon>
-  </a>
-
-  <div class="header_h6">
-    <h1><span>KB</span>Tool<span>.</span></h1>
-  </div>
-  <div class="header_h1">
-    <h1>In-put Transaction IDs</h1>
-  </div>
-
-  <div class="container-Ag">
-    <label style="color: rgb(73, 151, 63);" for="loanId">Enter customer ID for QID 106 and 117 :</label>
-    <input type="text" id="loanId" onkeyup="checkEnter(event)">
-  </div>
-  
-  <div class="container-ids">
-    <input type="text" id="ids" placeholder="Enter transactions_info_id and press Enter to copy" onkeyup="checkEnter(event)">
-  </div>
-  <div class="button-container">
-    <button id="copyButton" onclick="copyResult()">
-      <i class="fas fa-copy"></i> Copy
-    </button>
-    <button id="resetButton" onclick="resetFields()">
-      <i class="fas fa-redo"></i> Reset
-    </button>
-  </div>
-  <div id="output"></div>
-</section>
-
-<section>
-    <div class="header_h2">
-        <h1>Company Name Search</h1>
-      </div>
-      <div class="container-center">
-        <div class="container-zauba1">
-          <label style="color: rgb(73, 151, 63);" for="companyName">Enter company name:</label>
-          <br>
-          <input type="text" id="companyName" placeholder="Company Name">
-          <br>
-          <label style="color: rgb(73, 151, 63);"><input type="radio" name="searchType" value="site" checked> Site</label>
-          <label style="color: rgb(73, 151, 63);"><input type="radio" name="searchType" value="zauba"> Zauba</label>
-          <br>
-          <button onclick="search()" style="background-color: #3e5c0f;">Search</button>
-          <button id="zreset" onclick="resetForm()">Reset</button>
+        <div class="input-container">
+            <label for="idInput">Enter IDs</label>
+            <input type="text" id="idInput" placeholder="e.g., 60067633 12345 67890">
+            <button id="openTabsButton" class="open">Open Tabs</button>
+            <button id="stopTabsButton" class="stop" disabled>Stop</button>
+            <button id="resetButton" class="reset" disabled>Reset</button>
         </div>
-      </div>
-</section>
-
-<section>
-    <div class="zauba_container">
-        <div class="header_h3">
-            <h1>Only Zauba search </h1>
-          </div>
-        <script async src="https://cse.google.com/cse.js?cx=03c30e73c0d3441cd">
-        </script>
-        <div class="gcse-searchbox-only"></div>
-      </div>
-</section>
-
-<section>
-    <div class="header_h4">
-        <h1>copy-comments</h1>
-      </div>
-  <div class="container-bt">
-    <div class="button" onclick="copyToClipboard('QID75-Latest 3-months statement not available, Need Recent 3/6 Months Bank Acc statement Hence Given Preset.', this)">
-      <i class="bi bi-clipboard icon"></i>
-      <span>QID-75</span>
-      <div class="copied-message">Copied!</div>
-    </div>
-    <div class="button" onclick="copyToClipboard('Need valid id card or pay slips to confirm salary', this)">
-      <i class="bi bi-clipboard icon"></i>
-      <span>Docs-reupload</span>
-      <div class="copied-message">Copied!</div>
-    </div>
-    <div class="button" onclick="copyToClipboard('salary not found -- ', this)">
-      <i class="bi bi-clipboard icon"></i>
-      <span>not salary</span>
-      <div class="copied-message">Copied!</div>
-    </div>
-    <div class="button" onclick="copyToClipboard('Need to confirm salary -- ', this)">
-      <i class="bi bi-clipboard icon"></i>
-      <span>salary-hold</span>
-      <div class="copied-message">Copied!</div>
-    </div>
-    <div class="button" onclick="copyToClipboard('Need till date bank statement -- Hence given p-reset ', this)">
-      <i class="bi bi-clipboard icon"></i>
-      <span>1m p-reset</span>
-      <div class="
-      copied-message">Copied!</div>
-    </div>
-  </div>
-  <div style="margin-bottom: 330px;"></div>
-</section>
-
-
-
-      <!-- 
-        - #CONTACT
-     
-
-      <section class="contact" id="contact">
-
-        <div class="contact-content section-content">
-
-          <p class="section-subtitle">Contact</p>
-
-
-            <li class="contact-list-item">
-
-              <div class="contact-item-icon">
-                <ion-icon name="mail-outline"></ion-icon>
-              </div>
-
-              <div class="wrapper">
-                <h3 class="h4 contact-item-title">Email:</h3>
-
-
-
-                <a href="mailto:info@opensecai.com" class="contact-info">info@opensecai.com</a>
-
-                <a href="mailto:support@opensecai.com" class="contact-info">support@opensecai.com</a>
-              </div>
-
-            </li>
-          -->
-            <li>
-              <ul class="contac-social-list">
-
-                <li>
-                    <a href="https://instagram.com/opensecai?utm_source=qr&igshid=ZGUzMzM3NWJiOQ%3D%3D" class="contact-social-link">
-                      <div class="tooltip">Instagram</div>
-                      <ion-icon name="logo-instagram"></ion-icon>
-                    </a>
-                  </li>
-                  
-                  <li>
-                    <a href="https://github.com/opensecai" class="contact-social-link">
-                      <div class="tooltip">GitHub</div>
-                      <ion-icon name="logo-github"></ion-icon>
-                    </a>
-                  </li>
-                  
-
-                <li>
-                  <a href="https://twitter.com/opensec__ai" class="contact-social-link">
-                    <div class="tooltip">Twitter</div>
-
-                    <ion-icon name="logo-twitter"></ion-icon>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="https://www.linkedin.com/in/opensec-ai-7b2622285/" class="contact-social-link">
-                    <div class="tooltip">Linkedin</div>
-
-                    <ion-icon name="logo-linkedin"></ion-icon>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="https://www.youtube.com/@opensecAi" class="contact-social-link">
-                    <div class="tooltip">Youtube</div>
-
-                    <ion-icon name="logo-youtube"></ion-icon>
-                  </a>
-                </li>
-
-              </ul>
-            </li>
-
-          </ul>
-
+        
+        <div class="result-container">
+            <p>Status: <span id="status">Ready</span></p>
         </div>
-<!--
-        <form action="https://formsubmit.co/imaltaf@proton.me" method="POST" class="contact-form">
-
-          <div class="form-wrapper">
-
-            <label for="name" class="form-label">Name</label>
-
-            <div class="input-wrapper">
-
-              <input type="text" name="name" id="name" required placeholder="e.g Altaf" class="input-field">
-
-              <ion-icon name="person-circle"></ion-icon>
-
-            </div>
-
-          </div>
-
-          <div class="form-wrapper">
-
-            <label for="email" class="form-label">Email</label>
-
-            <div class="input-wrapper">
-
-              <input type="email" name="email" id="email" required placeholder="e.g altaf@opensecai.com"
-                class="input-field">
-
-              <ion-icon name="mail"></ion-icon>
-
-            </div>
-
-          </div>
-
-          <div class="form-wrapper">
-
-            <label for="phone" class="form-label">Phone</label>
-
-            <div class="input-wrapper">
-
-              <input type="tel" name="phone" id="phone" required placeholder="Phone Number" class="input-field">
-
-              <ion-icon name="call"></ion-icon>
-
-            </div>
-
-          </div>
-
-          <div class="form-wrapper">
-
-            <label for="message" class="form-label">Message</label>
-
-            <div class="input-wrapper">
-
-              <textarea name="message" id="message" required placeholder="Write message..."
-                class="input-field"></textarea>
-
-              <ion-icon name="chatbubbles"></ion-icon>
-
-            </div>
-
-          </div>
-
-          <button type="submit" class="btn btn-primary">Send</button>
-
-        </form>
-
-      </section>
-
-    </article>
-  </main>
-
-
--->
-
-  <!-- 
-    - #FOOTER
-  -->
-
-  <footer class="footer">
-    <div class="container">
-
-      <p class="h1 logo">
-        <a href="#">
-          opensec<span>Ai</span>
-        </a>
-      </p>
-      
-      <p class="copyright">
-        &copy; 2022  <a href="https://opensecai.com">OpensecAi</a>. All rights reserved <a href="https://imaltaf.online"> Devloped by ALTAF</a> 
-      </p>
-
     </div>
-  </footer>
 
+    <script>
+        const status = document.getElementById("status");
+        const openTabsButton = document.getElementById("openTabsButton");
+        const stopTabsButton = document.getElementById("stopTabsButton");
+        const resetButton = document.getElementById("resetButton");
+        let tabOpeningInterval;
 
-  <!-- 
-    - custom js link
-  -->
-  <script src="./assets/js/script.js"></script>
+        function openTabs() {
+            const idInput = document.getElementById("idInput");
+            const ids = idInput.value.split(" ").filter(id => id.trim() !== '');
 
-  <!-- 
-    - ionicon link
-  -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+            if (ids.length === 0) {
+                status.textContent = "No IDs provided";
+                return;
+            }
 
+            status.textContent = "Opening tabs...";
+            openTabsButton.disabled = true;
+            stopTabsButton.disabled = false;
+            resetButton.disabled = true;
+            idInput.disabled = true;
+
+            let index = 0;
+
+            function openNextTab() {
+                if (index < ids.length) {
+                    const id = ids[index];
+                    const url = `https://fkb.kreditbee.in/admin/profile?id=${id}`;
+                    window.open(url, "_blank");
+                    index++;
+                    tabOpeningInterval = setTimeout(openNextTab, 3000);
+                } else {
+                    status.textContent = "All tabs opened";
+                    openTabsButton.disabled = false;
+                    stopTabsButton.disabled = true;
+                    resetButton.disabled = false;
+                    idInput.disabled = false;
+                }
+            }
+
+            openNextTab();
+        }
+
+        function stopTabs() {
+            clearTimeout(tabOpeningInterval);
+            status.textContent = "Tab opening process stopped";
+            openTabsButton.disabled = false;
+            stopTabsButton.disabled = true;
+            resetButton.disabled = false;
+            idInput.disabled = false;
+        }
+
+        function reset() {
+            clearTimeout(tabOpeningInterval);
+            status.textContent = "Ready";
+            openTabsButton.disabled = false;
+            stopTabsButton.disabled = true;
+            resetButton.disabled = true;
+            idInput.value = "";
+            idInput.disabled = false;
+        }
+
+        openTabsButton.addEventListener("click", openTabs);
+        stopTabsButton.addEventListener("click", stopTabs);
+        resetButton.addEventListener("click", reset);
+    </script>
 </body>
-
 </html>
